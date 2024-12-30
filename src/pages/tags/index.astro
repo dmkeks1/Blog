@@ -1,21 +1,36 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
-const tags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
+const allPosts = Object.values(
+  import.meta.glob("../posts/*.md", { eager: true })
+);
+const tags = [
+  ...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat()),
+];
 const pageTitle = "Tag Index";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="tags">
-    {tags.map((tag) => (
-      <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
-    ))}
+    {
+      tags.map((tag) => (
+        <p class="tag">
+          <a href={`/tags/${tag}`}>{tag}</a>
+        </p>
+      ))
+    }
   </div>
 </BaseLayout>
 
 <style>
+  @import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
+
   a {
-    color: #00539F;
+    color: #bd93e0;
+    text-decoration: none;
+    font-family: "Fira Code", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
   }
 
   .tags {
@@ -25,10 +40,11 @@ const pageTitle = "Tag Index";
 
   .tag {
     margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: .5em;
-    padding: .5em 1em;
-    font-size: 1.15em;
-    background-color: #F8FCFD;
+    background-color: #2d2f3d;
+  }
+
+  .tag a:hover,
+  .tag a:focus {
+    background-color: #44475a;
   }
 </style>
